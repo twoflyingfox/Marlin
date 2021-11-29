@@ -946,7 +946,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 5000 } // twoflyingfox: tuned down from {3000, 3000, 100, 10000}
+#define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 100, 7500 } // twoflyingfox: had earlier tuned down from { 3000, 3000, 100, 10000 } to { 500, 500, 100, 5000 }. but is that really a wise decision? This post suggests to increase the accel limits. Hence increased back up to halfway.
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -973,10 +973,11 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-//#define CLASSIC_JERK
+#define CLASSIC_JERK // twoflyingfox: people seem to be consistently saying that JD is screwed up...? https://www.reddit.com/r/MarlinFirmware/comments/gsp0mr/classic_jerk_vs_linear_advance_same_gcode_no/
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK 10.0
-  #define DEFAULT_YJERK 10.0
+  #define DEFAULT_XJERK 16.0 // twoflyingfox: increased to 16. https://www.reddit.com/r/3Dprinting/comments/mmhiiu/scurve_acceleration_interesting_findings/
+
+  #define DEFAULT_YJERK 16.0 // twoflyingfox: increased to 16. https://www.reddit.com/r/3Dprinting/comments/mmhiiu/scurve_acceleration_interesting_findings/
   #define DEFAULT_ZJERK  0.3
   //#define DEFAULT_IJERK  0.3
   //#define DEFAULT_JJERK  0.3
