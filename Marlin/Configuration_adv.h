@@ -588,7 +588,7 @@
  * Multiple extruders can be assigned to the same pin in which case
  * the fan will turn on when any selected extruder is above the threshold.
  */
-#define E0_AUTO_FAN_PIN P2_04 // twoflyingfox
+#define E0_AUTO_FAN_PIN P2_04 // twoflyingfox, old firmware has it as FAN1_PIN
 #define E1_AUTO_FAN_PIN -1
 #define E2_AUTO_FAN_PIN -1
 #define E3_AUTO_FAN_PIN -1
@@ -1914,7 +1914,7 @@
 // #define LIN_ADVANCE // twoflyingfox: originally disabled, decided to disable for now
 #if ENABLED(LIN_ADVANCE)
   //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
-  #define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed, twoflyingfox: suggested 0.56, didn't change
+  #define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed, twoflyingfox: suggested 0.56, didn't change. original firmware has lin_advance enabled and set at 0.68. orignal 0.22, calibrated 0.84, but seems a bit off. dropped to 0.74. Still seems off, so dropped to 0.68. experimental s curve is enabled.
   //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
   // #define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration // twoflyingfox: originally disabled
 #endif

@@ -69,7 +69,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(twoflyingfox, Ender-3 Pro)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(twoflyingfox, Ender-3 Pro)" // Who made the changes. // twoflyingfox
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -600,9 +600,9 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp  22.20
-    #define DEFAULT_Ki   1.08
-    #define DEFAULT_Kd 114.00
+    #define DEFAULT_Kp  21.73 // twoflyingfox: changed to Creality Ender-3 defaults. originally 22.2
+    #define DEFAULT_Ki   1.54 // twoflyingfox: changed to Creality Ender-3 defaults. originally 1.08
+    #define DEFAULT_Kd  76.55 // twoflyingfox: changed to Creality Ender-3 defaults. originally 114
   #endif
 #endif // PIDTEMP
 
@@ -710,7 +710,7 @@
  * *** IT IS HIGHLY RECOMMENDED TO LEAVE THIS OPTION ENABLED! ***
  */
 #define PREVENT_COLD_EXTRUSION
-#define EXTRUDE_MINTEMP 170 // twoflyingfox
+#define EXTRUDE_MINTEMP 180 // twoflyingfox
 
 /**
  * Prevent a single extrusion longer than EXTRUDE_MAXLENGTH.
@@ -933,7 +933,7 @@
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 } // twoflyingfox: didn't change. reference suggests could be 500, 500, 10, 25
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 } // twoflyingfox: didn't change. reference suggests could be { 500, 500, 10, 25 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -946,11 +946,11 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 100, 7500 } // twoflyingfox: had earlier tuned down from { 3000, 3000, 100, 10000 } to { 500, 500, 100, 5000 }. but is that really a wise decision? This post suggests to increase the accel limits. Hence increased back up to halfway.
+#define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 100, 7500 } // twoflyingfox: had earlier tuned down from { 3000, 3000, 100, 10000 } to { 500, 500, 100, 5000 }. old firmware was { 500, 500, 100, 5000 }. but is that really a wise decision? This post suggests to increase the accel limits. Hence increased back up to halfway.
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 3000, 3000, 100, 20000 } // ...or, set your own edit limits, twoflyingfox: tuned down from {6000, 6000, 200, 20000}
+  #define MAX_ACCEL_EDIT_VALUES       { 3000, 3000, 100, 20000 } // ...or, set your own edit limits, twoflyingfox: tuned down from {6000, 6000, 200, 20000}. old firmware was { 6000, 6000, 200, 200000 }.
 #endif
 
 /**
@@ -961,9 +961,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves, twoflyingfox: tuned down from 3000
-#define DEFAULT_RETRACT_ACCELERATION  500    // E acceleration for retracts, twoflyingfox: tuned down from 3000
-#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves, twoflyingfox: tuned down from 3000
+#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves, twoflyingfox: tuned down from 3000. old firmware was also 500.
+#define DEFAULT_RETRACT_ACCELERATION  500    // E acceleration for retracts, twoflyingfox: tuned down from 3000. old firmware was also 500/
+#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves, twoflyingfox: tuned down from 3000. old firmware was 500.
 
 /**
  * Default Jerk limits (mm/s)
@@ -991,6 +991,7 @@
   #endif
 #endif
 
+// twoflyingfox: Previously 3.0, now set back to 5.0. See https://github.com/MarlinFirmware/Marlin/issues/16155
 #define DEFAULT_EJERK    5.0  // May be used by Linear Advance
 
 /**
@@ -1001,7 +1002,7 @@
  *   https://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge, twoflyingfox: suggested 0.08mm but havent changed
+  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge, twoflyingfox: suggested 0.08mm and old code is also 0.08mm, but havent changed. old code also has JD disabled.
   #define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle
                                       // for small segments (< 1mm) with large junction angles (> 135°).
 #endif
